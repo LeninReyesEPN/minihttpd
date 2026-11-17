@@ -91,7 +91,8 @@ int http_parsear(const char *buf, size_t len, struct http_peticion *p) {
 	if (fin == NULL)
 		return 400;
 
-	if(strcmp(p->version, "HTTP/1.1") == 0 && p->host[0] == '\0')
+	if (strcmp(p->version, "HTTP/1.1") == 0 &&
+	    (p->host[0] == '\0' || p->connection[0] == '\0' || p->user_agent[0] == '\0'))
 		return 400;
 
 	if (strcmp(p->version, "HTTP/1.1") == 0)
